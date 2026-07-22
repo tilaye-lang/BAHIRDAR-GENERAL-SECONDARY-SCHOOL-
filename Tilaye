@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ethiopian Examination and Assessment Service Agency</title>
+
+<style>
+body{
+    font-family:Arial;
+    text-align:center;
+    background:#f2f2f2;
+}
+
+.container{
+    width:350px;
+    margin:auto;
+    margin-top:40px;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px gray;
+}
+
+input{
+    width:90%;
+    padding:10px;
+    margin:10px;
+}
+
+button{
+    padding:10px 20px;
+    background:green;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+
+#result{
+    margin-top:20px;
+    text-align:left;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>ETHIOPIAN EXAMINATION AND ASSESSMENT SERVICE AGENCY</h2>
+
+<input type="text" id="name" placeholder="Student Name">
+
+<input type="text" id="admission" placeholder="Admission Number">
+
+<br>
+
+<button onclick="checkResult()">CHECK RESULT</button>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+function checkResult(){
+
+let name=document.getElementById("name").value;
+let adm=document.getElementById("admission").value;
+
+let num=parseInt(adm);
+
+if(isNaN(num)||num<63700||num>64000){
+document.getElementById("result").innerHTML=
+"<h3 style='color:red'>Admission Number Not Found</h3>";
+return;
+}
+
+//same admission number = same score
+let total=278+((num*37)%290);
+
+let english=Math.floor(total*0.17);
+let math=Math.floor(total*0.19);
+let biology=Math.floor(total*0.16);
+let chemistry=Math.floor(total*0.16);
+let physics=Math.floor(total*0.16);
+
+let aptitude=total-(english+math+biology+chemistry+physics);
+
+document.getElementById("result").innerHTML=
+
+"<h3>Candidate Result</h3>"+
+"<b>Name:</b> "+name+"<br><br>"+
+"<b>Admission:</b> "+adm+"<br><br>"+
+
+"<table border='1' width='100%'>"+
+"<tr><th>Subject</th><th>Score</th></tr>"+
+"<tr><td>English</td><td>"+english+"</td></tr>"+
+"<tr><td>Mathematics</td><td>"+math+"</td></tr>"+
+"<tr><td>Biology</td><td>"+biology+"</td></tr>"+
+"<tr><td>Chemistry</td><td>"+chemistry+"</td></tr>"+
+"<tr><td>Physics</td><td>"+physics+"</td></tr>"+
+"<tr><td>Aptitude</td><td>"+aptitude+"</td></tr>"+
+"<tr><th>Total</th><th>"+total+"</th></tr>"+
+"</table><br><small><b>For entertainment purposes only.</b></small>";
+
+}
+
+</script>
+
+</body>
+</html>
